@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+    <link href="styles/Calculator.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <h1>简易计算器</h1>
+    <div id="counter" v-on:keyup.enter="calculator">
+        <input v-model="num1" type="text" id="num1">
+        <select v-model="symbol" id="symbol">
+            <option value="0">+</option>
+            <option value="1">-</option>
+            <option value="2">×</option>
+            <option value="3">÷</option>
+        </select>
+        <input v-model="num2" type="text" id="num2">
+        <a id="resault">={{resault}}</a>
+        <button v-on:click="calculator" id="calculator">计算</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var Calculator = new Vue({
+            el: "#counter",
+            data: {
+                num1: 0,
+                num2: 0,
+                resault: 0,
+                symbol: '0'
+            },
+            methods: {
+                calculator: function () {
+                    switch (this.symbol) {
+                        case '0':
+                            this.resault = Number(this.num1) + Number(this.num2);
+                            break;
+                        case '1':
+                            this.resault = Number(this.num1) - Number(this.num2);
+                            break;
+                        case '2':
+                            this.resault = Number(this.num1) * Number(this.num2);
+                            break;
+                        case '3':
+                            // console.log(typeof(this.num1));
+                            if(this.num1 == 0 ){
+                                alert("除数不能为0");
+                                break;
+                            }
+                            this.resault = Number(this.num1) / Number(this.num2);
+                            break;
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
